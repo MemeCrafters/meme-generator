@@ -25,6 +25,7 @@ class MemeTags:
     shiroko = {"砂狼白子"} | blue_archive
     kokona = {"心奈"} | blue_archive
     plana = {"普拉娜"} | blue_archive
+    arona = {"阿罗娜"} | blue_archive
 
     # 公主连结
     re_dive = {"公主连结"}
