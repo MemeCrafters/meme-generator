@@ -40,7 +40,7 @@ jobs:
         id: metadata
         with:
           images: |
-            ${{ github.repository }}
+            meetwq/meme-generator
             ghcr.io/${{ github.repository }}
           tags: |
             type=ref,event=branch

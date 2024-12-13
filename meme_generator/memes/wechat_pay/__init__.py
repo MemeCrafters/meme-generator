@@ -35,7 +35,7 @@ args_type = MemeArgsType(
     ],
 )
 
-default_message = "https://github.com/MeetWq/meme-generator"
+default_message = "https://github.com/MemeCrafters/meme-generator"
 
 
 def wechat_pay(images: list[BuildImage], texts: list[str], args: Model):

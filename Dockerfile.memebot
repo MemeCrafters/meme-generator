@@ -11,7 +11,7 @@ COPY ./pyproject.toml ./poetry.lock* /tmp/
 RUN apt-get update \
   && apt-get install -y --no-install-recommends git \
   && poetry export -f requirements.txt --output requirements.txt --without-hashes \
-  && git clone --depth=1 https://github.com/MeetWq/github-meme-bot
+  && git clone --depth=1 https://github.com/MemeCrafters/github-meme-bot
 
 FROM python:3.10-slim as app
 

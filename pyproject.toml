@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "meme-generator"
-version = "0.1.8"
+version = "0.1.9"
 description = "Python package for making fun pictures"
 authors = ["meetwq <meetwq@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/MeetWq/meme-generator"
-repository = "https://github.com/MeetWq/meme-generator"
+homepage = "https://github.com/MemeCrafters/meme-generator"
+repository = "https://github.com/MemeCrafters/meme-generator"
 exclude = [
     "meme_generator/memes/**/*.jpg",
     "meme_generator/memes/**/*.png",

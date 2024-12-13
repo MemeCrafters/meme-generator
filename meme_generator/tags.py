@@ -23,7 +23,7 @@ class MemeTags:
     blue_archive = {"蔚蓝档案", "碧蓝档案"}
 
     shiroko = {"砂狼白子"} | blue_archive
-    kokona = {"心奈"} | blue_archive
+    kokona = {"春原心奈", "春原心菜"} | blue_archive
     plana = {"普拉娜"} | blue_archive
     arona = {"阿罗娜"} | blue_archive
 

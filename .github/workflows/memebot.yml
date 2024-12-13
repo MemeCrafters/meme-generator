@@ -14,7 +14,7 @@ jobs:
     if: startsWith(github.event.comment.body, '/')
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/meetwq/github-meme-bot:main
+      image: ghcr.io/memecrafters/github-meme-bot:main
       env:
         APP_ID: ${{ secrets.MEME_APP_ID }}
         PRIVATE_KEY: ${{ secrets.MEME_PRIVATE_KEY }}

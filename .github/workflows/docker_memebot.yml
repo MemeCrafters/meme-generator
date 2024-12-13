@@ -33,7 +33,7 @@ jobs:
         uses: docker/metadata-action@v4
         id: metadata
         with:
-          images: ghcr.io/meetwq/github-meme-bot
+          images: ghcr.io/memecrafters/github-meme-bot
           tags: |
             type=ref,event=branch
             type=ref,event=pr
