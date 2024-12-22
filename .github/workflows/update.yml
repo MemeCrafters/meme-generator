@@ -8,6 +8,9 @@ on:
       - "meme_generator/memes/**"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update-resource-list:
     runs-on: ubuntu-latest

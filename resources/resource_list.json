@@ -1,5 +1,13 @@
 [
   {
+    "path": "abstinence/images/base.png",
+    "hash": "eab5c86adda19164d59f056aab45513f"
+  },
+  {
+    "path": "abstinence/images/stamp.png",
+    "hash": "5c95a9657a78900cb8c3661144d94d22"
+  },
+  {
     "path": "ace_attorney_dialog/images/bubble.png",
     "hash": "dcfbf78adece47297792310e887d7960"
   },
@@ -3060,43 +3068,43 @@
     "hash": "bb1631780bd36ea5e2338611d2887800"
   },
   {
-    "path": "gorilla_throw/images/ 0.png",
+    "path": "gorilla_throw/images/00.png",
     "hash": "503b3d57ee2b8b545b80f1fbfb9947ed"
   },
   {
-    "path": "gorilla_throw/images/ 1.png",
+    "path": "gorilla_throw/images/01.png",
     "hash": "7f07c0d3b21d5c19bac1e85ad6ed1c30"
   },
   {
-    "path": "gorilla_throw/images/ 2.png",
+    "path": "gorilla_throw/images/02.png",
     "hash": "0ac8af9356a6c05bce8ec03fd8a4c213"
   },
   {
-    "path": "gorilla_throw/images/ 3.png",
+    "path": "gorilla_throw/images/03.png",
     "hash": "2ab14042cee247cba0a6db7a4477bf47"
   },
   {
-    "path": "gorilla_throw/images/ 4.png",
+    "path": "gorilla_throw/images/04.png",
     "hash": "a5e2f92e7cdb279a1ab33e4ba4043d50"
   },
   {
-    "path": "gorilla_throw/images/ 5.png",
+    "path": "gorilla_throw/images/05.png",
     "hash": "7e5770a0fe2a715d1225d7d300cbc92b"
   },
   {
-    "path": "gorilla_throw/images/ 6.png",
+    "path": "gorilla_throw/images/06.png",
     "hash": "3776336ddcaac9bbfd8e1641f64fa7ad"
   },
   {
-    "path": "gorilla_throw/images/ 7.png",
+    "path": "gorilla_throw/images/07.png",
     "hash": "aaf2ee8931be19be219dfde5b7528abe"
   },
   {
-    "path": "gorilla_throw/images/ 8.png",
+    "path": "gorilla_throw/images/08.png",
     "hash": "eb262cef4d0101dfcbce190285990d54"
   },
   {
-    "path": "gorilla_throw/images/ 9.png",
+    "path": "gorilla_throw/images/09.png",
     "hash": "852edeb0ff72205ba1fa01f5bb42135b"
   },
   {

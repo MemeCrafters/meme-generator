@@ -29,7 +29,7 @@ def gorilla_throw(images: list[BuildImage], texts, args):
 
     def maker(i: int) -> Maker:
         def make(imgs: list[BuildImage]) -> BuildImage:
-            frame = BuildImage.open(img_dir / f"{i:2d}.png")
+            frame = BuildImage.open(img_dir / f"{i:02d}.png")
             if i < 28:
                 return frame
             x, y, w, h, a = params[i - 28]
