@@ -12,12 +12,13 @@ from meme_generator import (
     ParserOption,
     add_meme,
 )
-from meme_generator.tags import MemeTags
 from meme_generator.exception import MemeFeedback
+from meme_generator.tags import MemeTags
 
 img_dir = Path(__file__).parent / "images"
 
 help_text = "图片编号，1-阿罗娜，2-普拉娜"
+
 
 class Model(MemeArgsModel):
     number: int = Field(0, description=help_text)
@@ -35,16 +36,20 @@ args_type = MemeArgsType(
 )
 
 
-def keep_your_money(images: list[BuildImage], texts: list[str], args:Model):
+def keep_your_money(images: list[BuildImage], texts: list[str], args: Model):
     if args.number == 0:
-        number = random.randint(1,2)
-    elif args.number in [1,2]:
+        number = random.randint(1, 2)
+    elif args.number in [1, 2]:
         number = args.number
     else:
         raise MemeFeedback("图片编号错误，请输入1或2")
     frame = BuildImage.open(img_dir / f"{number}.png")
-    img = images[0].convert("RGBA").resize_width(500)
-    frame.paste(img,(0,1080-img.height),alpha=True,below=True)
+    img = (
+        images[0]
+        .convert("RGBA")
+        .resize((500, 640), keep_ratio=True, inside=True, bg_color="white")
+    )
+    frame.paste(img, (0, 1080 - img.height), alpha=True, below=True)
     return frame.save_jpg()
 
 
@@ -54,8 +59,8 @@ add_meme(
     min_images=1,
     max_images=1,
     args_type=args_type,
-    keywords=["压岁钱来之不易"],
+    keywords=["压岁钱不要交给"],
     tags=MemeTags.arona | MemeTags.plana,
-    date_created=datetime(2024,12,29),
-    date_modified=datetime(2024,12,29),
+    date_created=datetime(2024, 12, 29),
+    date_modified=datetime(2024, 12, 29),
 )
