@@ -1,7 +1,9 @@
 import random
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
+from pil_utils import BuildImage
 from pydantic import Field
 
 from meme_generator import (
@@ -12,183 +14,63 @@ from meme_generator import (
     ParserOption,
     add_meme,
 )
-from pil_utils import BuildImage
-
+from meme_generator.exception import MemeFeedback, TextOverLength
 from meme_generator.tags import MemeTags
-from meme_generator.exception import MemeFeedback,TextOverLength
-
 
 img_dir = Path(__file__).parent / "images"
 
+
+@dataclass
+class Character:
+    name_cn: str
+    name_en: str
+    color: str
+    img_num: int
+
+
 characters = [
-    {
-        "name_cn": "爱莉",
-        "name_en": "airi",
-        "color": "#FB8AAC",
-        "img_num":15
-    },
-    {
-        "name_cn": "彰人",
-        "name_en": "akito",
-        "color": "#FF7722",
-        "img_num":13
-    },
-    {
-        "name_cn": "杏",
-        "name_en": "an",
-        "color": "#00BADC",
-        "img_num":13
-    },
-    {
-        "name_cn": "梦",
-        "name_en": "emu",
-        "color": "#FF66BB",
-        "img_num":13
-    },
-    {
-        "name_cn": "绘名",
-        "name_en": "ena",
-        "color": "#B18F6C",
-        "img_num":16
-    },
-    {
-        "name_cn": "遥",
-        "name_en": "haruka",
-        "color": "#6495F0",
-        "img_num":13
-    },
-    {
-        "name_cn": "穗波",
-        "name_en": "honami",
-        "color": "#F86666",
-        "img_num":15
-    },
-    {
-        "name_cn": "一歌",
-        "name_en": "ichika",
-        "color": "#33AAEE",
-        "img_num":15
-    },
-    {
-        "name_cn": "KAITO",
-        "name_en": "kaito",
-        "color": "#3366CC",
-        "img_num":13
-    },
-    {
-        "name_cn": "奏",
-        "name_en": "kanade",
-        "color": "#BB6688",
-        "img_num":14
-    },
-    {
-        "name_cn": "心羽",
-        "name_en": "kohane",
-        "color": "#FF6699",
-        "img_num":14
-    },
-    {
-        "name_cn": "连",
-        "name_en": "len",
-        "color": "#D3BD00",
-        "img_num":14
-    },
-    {
-        "name_cn": "流歌",
-        "name_en": "luka",
-        "color": "#F88CA7",
-        "img_num":13
-    },
-    {
-        "name_cn": "真冬",
-        "name_en": "mafuyu",
-        "color": "#7171AF",
-        "img_num":14
-    },
-    {
-        "name_cn": "MEIKO",
-        "name_en": "meiko",
-        "color": "#E4485F",
-        "img_num":13
-    },
-    {
-        "name_cn": "初音未来",
-        "name_en": "miku",
-        "color": "#33CCBB",
-        "img_num":13
-    },
-    {
-        "name_cn": "实乃理",
-        "name_en": "minori",
-        "color": "#F39E7D",
-        "img_num":14
-    },
-    {
-        "name_cn": "瑞希",
-        "name_en": "mizuki",
-        "color": "#CA8DB6",
-        "img_num":14
-    },
-    {
-        "name_cn": "宁宁",
-        "name_en": "nene",
-        "color": "#19CD94",
-        "img_num":13
-    },
-    {
-        "name_cn": "铃",
-        "name_en": "rin",
-        "color": "#E8A505",
-        "img_num":13
-    },
-    {
-        "name_cn": "类",
-        "name_en": "rui",
-        "color": "#BB88EE",
-        "img_num":16
-    },
-    {
-        "name_cn": "咲希",
-        "name_en": "saki",
-        "color": "#F5B303",
-        "img_num":15
-    },
-    {
-        "name_cn": "志步",
-        "name_en": "shiho",
-        "color": "#A0C10B",
-        "img_num":15
-    },
-    {
-        "name_cn": "雫",
-        "name_en": "shizuku",
-        "color": "#5CD0B9",
-        "img_num":13
-    },
-    {
-        "name_cn": "冬弥",
-        "name_en": "touya",
-        "color": "#0077DD",
-        "img_num":15
-    },
-    {
-        "name_cn": "司",
-        "name_en": "tsukasa",
-        "color": "#F09A04",
-        "img_num":15
-    }
+    Character("爱莉", "airi", "#FB8AAC", 15),
+    Character("彰人", "akito", "#FF7722", 13),
+    Character("杏", "an", "#00BADC", 13),
+    Character("梦", "emu", "#FF66BB", 13),
+    Character("绘名", "ena", "#B18F6C", 16),
+    Character("遥", "haruka", "#6495F0", 13),
+    Character("穗波", "honami", "#F86666", 15),
+    Character("一歌", "ichika", "#33AAEE", 15),
+    Character("KAITO", "kaito", "#3366CC", 13),
+    Character("奏", "kanade", "#BB6688", 14),
+    Character("心羽", "kohane", "#FF6699", 14),
+    Character("连", "len", "#D3BD00", 14),
+    Character("流歌", "luka", "#F88CA7", 13),
+    Character("真冬", "mafuyu", "#7171AF", 14),
+    Character("MEIKO", "meiko", "#E4485F", 13),
+    Character("初音未来", "miku", "#33CCBB", 13),
+    Character("实乃理", "minori", "#F39E7D", 14),
+    Character("瑞希", "mizuki", "#CA8DB6", 14),
+    Character("宁宁", "nene", "#19CD94", 13),
+    Character("铃", "rin", "#E8A505", 13),
+    Character("类", "rui", "#BB88EE", 16),
+    Character("咲希", "saki", "#F5B303", 15),
+    Character("志步", "shiho", "#A0C10B", 15),
+    Character("雫", "shizuku", "#5CD0B9", 13),
+    Character("冬弥", "touya", "#0077DD", 15),
+    Character("司", "tsukasa", "#F09A04", 15),
 ]
 
-help_text = "角色编号：" + ",".join([f"{i+1}、{characters[i]['name_cn']}" for i in range(26)]) + "。"
+
+help_text = "角色编号：" + "，".join(
+    [f"{i+1}、{characters[i].name_cn}" for i in range(26)]
+)
 
 
 class Model(MemeArgsModel):
     character: int = Field(0, description=help_text)
     number: int = Field(0, description="图片编号")
 
+
 args_type = MemeArgsType(
     args_model=Model,
-    args_examples=[Model(character=i,number=0) for i in range(1, 27)],
+    args_examples=[Model(character=i, number=0) for i in range(1, 27)],
     parser_options=[
         ParserOption(
             names=["-c", "--character", "角色编号"],
@@ -204,7 +86,7 @@ args_type = MemeArgsType(
 )
 
 
-def pjsk(images, texts: list[str], args:Model):
+def pjsk(images, texts: list[str], args: Model):
     text = texts[0]
 
     character = None
@@ -213,41 +95,40 @@ def pjsk(images, texts: list[str], args:Model):
     elif args.character in range(1, 27):
         character = characters[int(args.character) - 1]
     else:
-        raise MemeFeedback(f"角色编号错误，请输入1-26")
-    
+        raise MemeFeedback("角色编号错误，请输入1-26")
+
     if args.number == 0:
-        n = random.randint(0, character["img_num"])
-    elif args.number in range(1, character["img_num"]+1):
+        n = random.randint(0, character.img_num - 1)
+    elif args.number in range(1, character.img_num + 1):
         n = args.number - 1
     else:
-        raise MemeFeedback(f"角色{character['name_cn']}的图片编号错误，请输入1-{character['img_num']}。")
+        raise MemeFeedback(
+            f"角色{character.name_cn}的图片编号错误，请输入1-{character.img_num}"
+        )
 
-    img = BuildImage.open(img_dir / character["name_en"] / f"{n:02d}.png")
-    color = character["color"]
-    w,h = img.size
+    img = BuildImage.open(img_dir / character.name_en / f"{n:02d}.png")
+    color = character.color
+    w, h = img.size
 
-    text_frame = BuildImage.new("RGBA", (w-20,50),)
+    text_frame = BuildImage.new("RGBA", (w - 20, 50))
     try:
         text_frame.draw_text(
-            (0,0,w-20,50),
+            (0, 0, w - 20, 50),
             text,
             fill=color,
             max_fontsize=50,
             min_fontsize=20,
             stroke_ratio=0.12,
             stroke_fill="white",
-            font_families=["SSFangTangTi"]
+            font_families=["033-SSFangTangTi"],
         )
-    except:
+    except ValueError:
         raise TextOverLength(text)
-    
+
     img.paste(
-        text_frame.rotate(
-            40 *(0.5- random.random()),
-            expand=True
-        ),
-        (0,10),
-        alpha=True
+        text_frame.rotate(40 * (0.5 - random.random()), expand=True),
+        (0, 10),
+        alpha=True,
     )
     return img.save_png()
 
@@ -258,11 +139,12 @@ add_meme(
     min_texts=1,
     max_texts=1,
     args_type=args_type,
-    keywords=["世界计划"],
+    keywords=["pjsk", "世界计划"],
     shortcuts=[
         CommandShortcut(
-            key="世界计划"+characters[i]['name_cn'],
-            args = ["--character",f"{i+1}"]
+            key=rf"(:?pjsk|世界计划)\s+(:?{characters[i].name_cn}|{characters[i].name_en})",
+            args=["--character", f"{i+1}"],
+            humanized=f"pjsk {characters[i].name_cn}",
         )
         for i in range(26)
     ],
