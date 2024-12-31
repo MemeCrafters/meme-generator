@@ -8,7 +8,7 @@ from meme_generator import add_meme
 img_dir = Path(__file__).parent / "images"
 
 
-def my_newyear(images: list[BuildImage], texts: list[str], args):
+def your_new_years_eve(images: list[BuildImage], texts: list[str], args):
     frame = BuildImage.open(img_dir / "0.png")
     img = images[0].convert("RGBA").resize((586,430),inside=True,keep_ratio=True)
     frame.paste(img,(0,650),alpha=True,below=True)
@@ -16,8 +16,8 @@ def my_newyear(images: list[BuildImage], texts: list[str], args):
 
 
 add_meme(
-    "my_newyear",
-    my_newyear,
+    "your_new_years_eve",
+    your_new_years_eve,
     min_images=1,
     max_images=1,
     keywords=["你的跨年"],
