@@ -67,21 +67,23 @@ def kokona_say(images, texts: list[str], args: Model):
     try:
         if left:
             frame.draw_text(
-                (0, 0, 680, 220),
+                (50, 0, 650, 220),
                 text,
                 max_fontsize=100,
                 min_fontsize=50,
                 fill="black",
                 lines_align="center",
+                allow_wrap=True,
             )
         else:
             frame.draw_text(
-                (frame.width - 680, 0, frame.width, 220),
+                (frame.width - 650, 0, frame.width - 50, 220),
                 text,
                 max_fontsize=100,
                 min_fontsize=50,
                 fill="black",
                 lines_align="center",
+                allow_wrap=True,
             )
     except TextOverLength:
         raise TextOverLength(text)

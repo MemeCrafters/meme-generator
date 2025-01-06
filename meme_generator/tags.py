@@ -119,6 +119,9 @@ class MemeTags:
 
     jinhsi = {"今汐"} | wuthering_waves
 
+    #世界计划
+    project_sekai = {"世界计划"}
+
     # 其他
     capoo = {"猫猫虫", "咖波"}
     nekoha = {"猫羽雫"}
