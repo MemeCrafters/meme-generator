@@ -96,6 +96,7 @@ class MemeTags:
 
     # VOCALOID
     miku = {"初音未来"}
+    luotianyi = {"洛天依"}
 
     # 明日方舟
     arknights = {"明日方舟"}
@@ -119,7 +120,7 @@ class MemeTags:
 
     jinhsi = {"今汐"} | wuthering_waves
 
-    #世界计划
+    # 世界计划
     project_sekai = {"世界计划"}
 
     # 其他
