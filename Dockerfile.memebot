@@ -1,4 +1,4 @@
-FROM python:3.10 as tmp
+FROM python:3.10 AS tmp
 
 WORKDIR /tmp
 
@@ -10,10 +10,11 @@ COPY ./pyproject.toml ./poetry.lock* /tmp/
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends git \
+  && poetry self add poetry-plugin-export \
   && poetry export -f requirements.txt --output requirements.txt --without-hashes \
   && git clone --depth=1 https://github.com/MemeCrafters/github-meme-bot
 
-FROM python:3.10-slim as app
+FROM python:3.10-slim AS app
 
 WORKDIR /app
 
