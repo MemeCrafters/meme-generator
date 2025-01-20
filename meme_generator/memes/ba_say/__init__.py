@@ -29,13 +29,14 @@ class Character:
     name_en:str
 
 Characters = [
+    #pixiv@lowLDR
+    Character("心奈", "kokona"),
+
+    #bilibili@mooooen
     Character("爱丽丝", "arisu"),
     Character("泉奈", "izuna"),
     Character("key", "key"),
-    Character("心奈", "kokona"),
     Character("玛丽", "mari"),
-    Character("小夏", "natsu"),
-    Character("玲纱", "reisa"),
     Character("濑名", "sena"),
     Character("优香", "yuuka"),
 ]
@@ -43,7 +44,7 @@ Characters = [
 
 help_text = [
     "角色编号："+"，".join(
-        [f"{i+1}、{Characters[i].name_cn}" for i in range(9)]
+        [f"{i+1}、{Characters[i].name_cn}" for i in range(len(Characters))]
     ),
     "消息框的位置，包含 left、right、random"
     ]
@@ -88,10 +89,10 @@ def ba_say(images, texts: list[str], args: Model):
 
     if args.character == 0:
         character = random.choice(Characters)
-    elif args.character <= 9:
+    elif args.character <= len(Characters):
         character = Characters[args.character-1]
     else:
-        raise MemeFeedback("角色编号错误，请输入1-9")
+        raise MemeFeedback(f"角色编号错误，请输入1-{len(Characters)}")
 
     if args.position in ["left", "right"]:
         position = args.position
@@ -133,15 +134,13 @@ add_meme(
             key=f"{Characters[i].name_cn}说",
             args=["--character",f"{i+1}"]
         )
-        for i in range(9)
+        for i in range(len(Characters))
         ],
     tags=MemeTags.arisu
     | MemeTags.izuna
     | MemeTags.key
     | MemeTags.kokona
     | MemeTags.mari
-    | MemeTags.natsu
-    | MemeTags.reisa
     | MemeTags.sena
     | MemeTags.yuuka,
     date_created=datetime(2024, 12, 12),

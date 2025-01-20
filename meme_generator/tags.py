@@ -27,8 +27,6 @@ class MemeTags:
     key = {"key"} | blue_archive
     kokona = {"春原心奈","春原心菜"} | blue_archive
     mari = {"伊落玛丽"} | blue_archive
-    natsu = {"柚鸟夏"} | blue_archive
-    reisa = {"宇泽玲纱","芋泥"} | blue_archive
     sena = {"冰室濑名"} | blue_archive
     shiroko = {"砂狼白子"} | blue_archive
     yuuka = {"早濑优香","邮箱"} | blue_archive
