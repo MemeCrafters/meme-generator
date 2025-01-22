@@ -5,19 +5,19 @@ from pathlib import Path
 from typing import Literal
 
 from arclet.alconna import store_value
+from PIL.Image import Transpose
 from pil_utils import BuildImage
 from pydantic import Field
-from PIL.Image import Transpose
 
 from meme_generator import (
+    CommandShortcut,
     MemeArgsModel,
     MemeArgsType,
     ParserArg,
     ParserOption,
     add_meme,
-    CommandShortcut,
 )
-from meme_generator.exception import TextOverLength,MemeFeedback
+from meme_generator.exception import MemeFeedback, TextOverLength
 from meme_generator.tags import MemeTags
 
 img_dir = Path(__file__).parent / "images"
@@ -25,14 +25,14 @@ img_dir = Path(__file__).parent / "images"
 
 @dataclass
 class Character:
-    name_cn:str
-    name_en:str
+    name_cn: str
+    name_en: str
+
 
 Characters = [
-    #pixiv@lowLDR
+    # pixiv@lowLDR
     Character("心奈", "kokona"),
-
-    #bilibili@mooooen
+    # bilibili@mooooen
     Character("爱丽丝", "arisu"),
     Character("泉奈", "izuna"),
     Character("key", "key"),
@@ -42,46 +42,41 @@ Characters = [
 ]
 
 
-help_text = [
-    "角色编号："+"，".join(
-        [f"{i+1}、{Characters[i].name_cn}" for i in range(len(Characters))]
-    ),
-    "消息框的位置，包含 left、right、random"
-    ]
+help_character = "角色编号：" + "，".join(
+    [f"{i+1}、{Characters[i].name_cn}" for i in range(len(Characters))]
+)
+help_position = "消息框的位置，包含 left、right、random"
 
 
 class Model(MemeArgsModel):
-    character: int = Field(
-        0, description=help_text[0]
-    )
-    position: Literal["left", "right","random"] = Field(
-        "random", description=help_text[1]
+    character: int = Field(0, description=help_character)
+    position: Literal["left", "right", "random"] = Field(
+        "random", description=help_position
     )
 
 
 args_type = MemeArgsType(
     args_model=Model,
-    args_examples=[Model(character=c,position="right") for c in range(1,10)],
+    args_examples=[Model(character=c, position="right") for c in range(1, 10)],
     parser_options=[
         ParserOption(
             names=["-c", "--character"],
             args=[ParserArg(name="character", value="str")],
-            help_text=help_text[0],
+            help_text=help_character,
         ),
         ParserOption(
             names=["-p", "--position"],
             args=[ParserArg(name="position", value="str")],
-            help_text=help_text[1],
+            help_text=help_position,
         ),
         ParserOption(
             names=["--left", "左"], dest="position", action=store_value("left")
         ),
         ParserOption(
             names=["--right", "右"], dest="position", action=store_value("right")
-        )
+        ),
     ],
 )
-
 
 
 def ba_say(images, texts: list[str], args: Model):
@@ -90,7 +85,7 @@ def ba_say(images, texts: list[str], args: Model):
     if args.character == 0:
         character = random.choice(Characters)
     elif args.character <= len(Characters):
-        character = Characters[args.character-1]
+        character = Characters[args.character - 1]
     else:
         raise MemeFeedback(f"角色编号错误，请输入1-{len(Characters)}")
 
@@ -131,11 +126,10 @@ add_meme(
     keywords=["ba说"],
     shortcuts=[
         CommandShortcut(
-            key=f"{Characters[i].name_cn}说",
-            args=["--character",f"{i+1}"]
+            key=f"{Characters[i].name_cn}说", args=["--character", f"{i+1}"]
         )
         for i in range(len(Characters))
-        ],
+    ],
     tags=MemeTags.arisu
     | MemeTags.izuna
     | MemeTags.key
