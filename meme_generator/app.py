@@ -4,6 +4,7 @@ from typing import Any, Literal, Optional
 
 import filetype
 from fastapi import Depends, FastAPI, Form, HTTPException, Response, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, ValidationError
 
 from meme_generator.compat import model_dump, model_json_schema, type_validate_python
@@ -19,6 +20,17 @@ from meme_generator.meme import CommandShortcut, Meme, MemeArgsModel, ParserOpti
 from meme_generator.utils import MemeProperties, render_meme_list, run_sync
 
 app = FastAPI()
+
+
+if meme_config.server.CORS_switch:
+    config = meme_config.server.CORS_config
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=config.allow_origins,
+        allow_credentials=config.allow_credentials,
+        allow_methods=config.allow_methods, 
+        allow_headers=config.allow_headers,  
+    )
 
 
 class MemeArgsResponse(BaseModel):
