@@ -142,9 +142,9 @@ add_meme(
     keywords=["pjsk", "世界计划"],
     shortcuts=[
         CommandShortcut(
-            key=rf"(:?pjsk|世界计划)\s+(:?{characters[i].name_cn}|{characters[i].name_en})",
+            key=rf"(:?pjsk|世界计划)[_-]?(:?{characters[i].name_cn}|{characters[i].name_en})",
             args=["--character", f"{i+1}"],
-            humanized=f"pjsk {characters[i].name_cn}",
+            humanized=f"pjsk{characters[i].name_cn}",
         )
         for i in range(26)
     ],

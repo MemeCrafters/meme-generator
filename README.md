@@ -19,6 +19,8 @@ _✨ 表情包生成器，用于制作各种沙雕表情包 ✨_
 
 </div>
 
+表情包制作 Rust 版 [--> meme-generator-rs <--](https://github.com/MemeCrafters/meme-generator-rs)
+
 ## 表情列表
 
 表情详细信息、表情预览等可以在 [--> 表情列表 <--](https://github.com/MemeCrafters/meme-generator/wiki/%E8%A1%A8%E6%83%85%E5%88%97%E8%A1%A8) 查看

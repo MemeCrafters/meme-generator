@@ -1,4 +1,4 @@
-FROM python:3.10 as tmp
+FROM python:3.10 AS tmp
 
 WORKDIR /tmp
 
@@ -8,9 +8,10 @@ ENV PATH="${PATH}:/root/.local/bin"
 
 COPY ./pyproject.toml ./poetry.lock* /tmp/
 
-RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
+RUN poetry self add poetry-plugin-export \
+  && poetry export -f requirements.txt --output requirements.txt --without-hashes
 
-FROM python:3.10-slim as app
+FROM python:3.10-slim AS app
 
 WORKDIR /app
 
