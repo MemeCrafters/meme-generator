@@ -4,10 +4,11 @@ from pathlib import Path
 from pil_utils import BuildImage
 
 from meme_generator import add_meme
-from meme_generator.exception import TextOverLength
+from meme_generator.tags import MemeTags
 from meme_generator.utils import make_jpg_or_gif
 
 img_dir = Path(__file__).parent / "images"
+
 
 def luotianyi_need(images: list[BuildImage], texts: list[str], args):
     frame = BuildImage.open(img_dir / "0.png")
@@ -27,6 +28,7 @@ add_meme(
     min_texts=0,
     max_texts=0,
     keywords=["洛天依要", "天依要"],
+    tags=MemeTags.luotianyi,
     date_created=datetime(2025, 2, 11),
     date_modified=datetime(2025, 2, 11),
 )
