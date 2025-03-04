@@ -15,8 +15,6 @@ def remote_control(images: list[BuildImage], texts, args):
             img = imgs[0].convert("RGBA")
             w, h = img.size
 
-            dx = -w // 50
-            dy = -h // 50
             locs = [
                 (0, 0),
                 (w // 80, h // 80),
@@ -48,7 +46,7 @@ add_meme(
     remote_control,
     min_images=1,
     max_images=1,
-    keywords=["遥控器"],
+    keywords=["遥控"],
     date_created=datetime(2025, 3, 4),
     date_modified=datetime(2025, 3, 4),
 )
