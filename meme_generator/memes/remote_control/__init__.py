@@ -27,7 +27,7 @@ def remote_control(images: list[BuildImage], texts, args):
             frame.paste(img, locs[i], alpha=True)
 
             overlay = BuildImage.open(img_dir / "0.png")
-            overlay = overlay.resize_height(h // 2)
+            overlay = overlay.resize_height(int(h / 2.5))
             x = w - overlay.width
             y = h - overlay.height
             frame.paste(overlay, (x, y), alpha=True)
@@ -46,7 +46,7 @@ add_meme(
     remote_control,
     min_images=1,
     max_images=1,
-    keywords=["遥控"],
+    keywords=["遥控", "控制"],
     date_created=datetime(2025, 3, 4),
     date_modified=datetime(2025, 3, 4),
 )
