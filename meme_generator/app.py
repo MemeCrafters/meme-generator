@@ -17,6 +17,7 @@ from meme_generator.log import LOGGING_CONFIG, setup_logger
 from meme_generator.manager import get_meme, get_meme_keys, get_memes
 from meme_generator.meme import CommandShortcut, Meme, MemeArgsModel, ParserOption
 from meme_generator.utils import MemeProperties, render_meme_list, run_sync
+from meme_generator.version import __version__
 
 app = FastAPI()
 
@@ -130,6 +131,10 @@ def register_routers():
         content = result.getvalue()
         media_type = str(filetype.guess_mime(content)) or "text/plain"
         return Response(content=content, media_type=media_type)
+
+    @app.get("/meme/version")
+    def _():
+        return __version__
 
     @app.get("/memes/keys")
     def _():

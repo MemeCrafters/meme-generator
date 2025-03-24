@@ -144,6 +144,34 @@
     "hash": "5b177dd1778fd2a2a8703b4da5870847"
   },
   {
+    "path": "ba_say/images/arisu.png",
+    "hash": "2871ea924b78c98c22545a5a99fb03a3"
+  },
+  {
+    "path": "ba_say/images/izuna.png",
+    "hash": "3e54f3c7526fd9141d25a19fdda529a7"
+  },
+  {
+    "path": "ba_say/images/key.png",
+    "hash": "ae98856499273abdff3a2752027ea70c"
+  },
+  {
+    "path": "ba_say/images/kokona.png",
+    "hash": "6b7d9244c6f1f36bfd80d66c9dfee8cb"
+  },
+  {
+    "path": "ba_say/images/mari.png",
+    "hash": "512c46f03f7dd6bf5117c0c9ec8d4a14"
+  },
+  {
+    "path": "ba_say/images/sena.png",
+    "hash": "1d9caf5c4390876e0723577832f67101"
+  },
+  {
+    "path": "ba_say/images/yuuka.png",
+    "hash": "2ff39cce2457ab7cc47bf500f78e16c5"
+  },
+  {
     "path": "back_to_work/images/0.png",
     "hash": "d85cf009fac3ce49ed90883e0c61e737"
   },
@@ -2520,6 +2548,10 @@
     "hash": "acc2814bf86e9660f551b73d40909d53"
   },
   {
+    "path": "fogging/images/0.png",
+    "hash": "4ea66ff0ad95d81fd2f0b87c99ba6302"
+  },
+  {
     "path": "frieren_take/images/0.png",
     "hash": "e398b7c3f7088245e4b3772375757beb"
   },
@@ -4144,14 +4176,6 @@
     "hash": "fa158f632f04f81c4eeeb4766222df07"
   },
   {
-    "path": "kokona_say/images/01.png",
-    "hash": "865e1b6d5a16cfaefc54e5eeaeea78a0"
-  },
-  {
-    "path": "kokona_say/images/02.png",
-    "hash": "76bdef6330d63d75f03fecefee7d806d"
-  },
-  {
     "path": "kokona_seal/images/1.png",
     "hash": "22c7dc05fe1080b6fa97d9cddb6b9e3c"
   },
@@ -4602,6 +4626,10 @@
   {
     "path": "love_you/images/1.png",
     "hash": "3e44083dd543e1380bdc03931b09984d"
+  },
+  {
+    "path": "luotianyi_need/images/0.png",
+    "hash": "4967f8e5f4e2152bb7309cb5db85bb89"
   },
   {
     "path": "luotianyi_say/images/0.png",
@@ -7718,6 +7746,10 @@
   {
     "path": "read_book/images/0.png",
     "hash": "c0bfd676ec62f8ef1a2e2c98244681ba"
+  },
+  {
+    "path": "remote_control/images/0.png",
+    "hash": "94b68bbceaed75ca70a974069fc6b9a2"
   },
   {
     "path": "repeat/images/0.jpg",

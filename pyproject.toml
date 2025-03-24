@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "meme-generator"
-version = "0.1.10"
+version = "0.1.11"
 description = "Python package for making fun pictures"
 authors = ["meetwq <meetwq@gmail.com>"]
 license = "MIT"
