@@ -49,7 +49,7 @@ add_meme(
     do_not_play,
     min_images=1,
     max_images=1,
-    min_texts=1,
+    min_texts=0,
     max_texts=10,
     keywords=["不玩了"],
     date_created=datetime(2025, 3, 26),
