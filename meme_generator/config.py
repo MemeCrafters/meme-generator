@@ -37,9 +37,18 @@ class TranslatorConfig(BaseModel):
     baidu_trans_apikey: str = ""
 
 
+class CORSConfig(BaseModel):
+    allow_origins: list[str] = ['*']
+    allow_credentials: bool = True
+    allow_methods: list[str] = ['*']
+    allow_headers: list[str] = ['*']
+
+
 class ServerConfig(BaseModel):
     host: str = "127.0.0.1"
     port: int = 2233
+    CORS_switch: bool = False
+    CORS_config: CORSConfig = CORSConfig()
 
 
 class LogConfig(BaseModel):
