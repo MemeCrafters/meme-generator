@@ -131,7 +131,9 @@ class MemeTags:
     project_sekai = {"世界计划"}
 
     # 魔女的夜宴
-    ayachi_holdsign = {"魔女的夜宴", "绫地宁宁", "宁宁"}
+    yuzu_soft = {"柚子社"}
+    sabbat_of_the_witch = {"魔女的夜宴"} | yuzu_soft
+    ayachi = {"绫地宁宁"} | sabbat_of_the_witch
 
     # 其他
     capoo = {"猫猫虫", "咖波"}

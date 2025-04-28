@@ -6,6 +6,7 @@ from pil_utils import BuildImage
 
 from meme_generator import add_meme
 from meme_generator.exception import TextOverLength
+from meme_generator.tags import MemeTags
 
 img_dir = Path(__file__).parent / "images"
 
@@ -13,10 +14,10 @@ img_dir = Path(__file__).parent / "images"
 def ayachi_holdsign(images, texts: list[str], args):
     text = texts[0]
     frame = BuildImage.open(img_dir / "0.png")
-    text_img = BuildImage.new("RGBA", (670, 552))
+    text_img = BuildImage.new("RGBA", (600, 350))
     try:
         text_img.draw_text(
-            (20, 20, 650, 532),
+            (20, 20, 580, 330),
             text,
             max_fontsize=150,
             min_fontsize=80,
@@ -42,6 +43,7 @@ add_meme(
     max_texts=1,
     default_texts=["我控制不住自己啊"],
     keywords=["宁宁举牌"],
+    tags=MemeTags.ayachi,
     date_created=datetime(2025, 4, 28),
     date_modified=datetime(2025, 4, 28),
 )
