@@ -132,7 +132,7 @@ class MemeTags:
 
     # 魔女的夜宴
     ayachi_holdsign = {"魔女的夜宴", "绫地宁宁", "宁宁"}
-    
+
     # 其他
     capoo = {"猫猫虫", "咖波"}
     nekoha = {"猫羽雫"}
