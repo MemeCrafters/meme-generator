@@ -1,8 +1,9 @@
 from datetime import datetime
 from pathlib import Path
-from PIL import ImageFilter
 
+from PIL import ImageFilter
 from pil_utils import BuildImage
+
 from meme_generator import add_meme
 from meme_generator.exception import TextOverLength
 
@@ -26,9 +27,9 @@ def ayachi_sign(images, texts: list[str], args):
         )
     except ValueError:
         raise TextOverLength(text)
-    
+
     text_img.image = text_img.image.filter(ImageFilter.GaussianBlur(radius=1))
-    
+
     text_img = text_img.perspective(((0, 235), (523, 0), (659, 297), (170, 536)))
     frame.paste(text_img, (125, 307), alpha=True)
     return frame.save_jpg()

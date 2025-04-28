@@ -20,7 +20,7 @@ def flush(images: list[BuildImage], texts, args):
             w, h = img.size
 
             if i >= 18:
-                frame = BuildImage.open(img_dir / f"{i-18}.png")
+                frame = BuildImage.open(img_dir / f"{i - 18}.png")
                 return frame.resize((w, h))
 
             j = 0.2 * (2 * random.random() - 1)  # 抖动

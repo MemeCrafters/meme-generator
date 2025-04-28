@@ -59,7 +59,7 @@ characters = [
 
 
 help_text = "角色编号：" + "，".join(
-    [f"{i+1}、{characters[i].name_cn}" for i in range(26)]
+    [f"{i + 1}、{characters[i].name_cn}" for i in range(26)]
 )
 
 
@@ -143,7 +143,7 @@ add_meme(
     shortcuts=[
         CommandShortcut(
             key=rf"(:?pjsk|世界计划)[_-]?(:?{characters[i].name_cn}|{characters[i].name_en})",
-            args=["--character", f"{i+1}"],
+            args=["--character", f"{i + 1}"],
             humanized=f"pjsk{characters[i].name_cn}",
         )
         for i in range(26)

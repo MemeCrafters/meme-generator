@@ -43,7 +43,7 @@ characters = [
 
 
 help_character = "角色编号：" + "，".join(
-    [f"{i+1}、{characters[i].name_cn}" for i in range(len(characters))]
+    [f"{i + 1}、{characters[i].name_cn}" for i in range(len(characters))]
 )
 help_position = "消息框的位置，包含 left、right、random"
 
@@ -128,7 +128,7 @@ add_meme(
     keywords=["ba说"],
     shortcuts=[
         CommandShortcut(
-            key=f"{characters[i].name_cn}说", args=["--character", f"{i+1}"]
+            key=f"{characters[i].name_cn}说", args=["--character", f"{i + 1}"]
         )
         for i in range(len(characters))
     ],

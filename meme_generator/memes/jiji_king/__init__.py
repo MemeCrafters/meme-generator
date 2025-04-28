@@ -43,7 +43,7 @@ def jiji_king(images: list[BuildImage], texts: list[str], args: Model):
     if len(texts) == 1:
         if len(images) == 1:
             chars = [texts[0]] * block_num
-            text = f"我是{texts[0]*2}国王"
+            text = f"我是{texts[0] * 2}国王"
         else:
             text = texts[0]
     elif len(texts) == 2:
