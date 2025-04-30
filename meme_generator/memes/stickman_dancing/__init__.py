@@ -43,7 +43,6 @@ def stickman_dancing(images: list[BuildImage], texts, args):
     ]
     # fmt: on
 
-
     frames: list[IMG] = []
     for i in range(109):
         frame = BuildImage.open(img_dir / f"{i}.png")
