@@ -140,3 +140,4 @@ class MemeTags:
     nekoha = {"猫羽雫"}
     kirby = {"星之卡比"}
     atri = {"亚托莉", "ATRI", "萝卜子"}
+    stickman = {"火柴人"}
