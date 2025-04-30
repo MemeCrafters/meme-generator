@@ -10,6 +10,7 @@ from meme_generator.utils import save_gif
 
 img_dir = Path(__file__).parent / "images"
 
+
 def play_basketball(images: list[BuildImage], texts, args):
     img = images[0].convert("RGBA").square().resize((77, 77))
 
@@ -53,7 +54,7 @@ def play_basketball(images: list[BuildImage], texts, args):
         ((283, 280), -32),
         ((287, 315), -32),
     ]
-    
+
     frames: list[IMG] = []
     for loc, rotation in frames_info:
         frame = BuildImage.open(img_dir / f"{len(frames)}.png")
@@ -61,7 +62,9 @@ def play_basketball(images: list[BuildImage], texts, args):
             x, y = loc
             current_img = img.copy()
             if rotation:
-                current_img = current_img.rotate(rotation, expand=True, fillcolor=(0, 0, 0, 0))
+                current_img = current_img.rotate(
+                    rotation, expand=True, fillcolor=(0, 0, 0, 0)
+                )
             w, h = current_img.size
             pos = (x - w // 2, y - h // 2)
             frame.paste(current_img, pos, below=True)
@@ -78,4 +81,4 @@ add_meme(
     tags=MemeTags.stickman,
     date_created=datetime(2025, 4, 30),
     date_modified=datetime(2025, 4, 30),
-) 
+)
