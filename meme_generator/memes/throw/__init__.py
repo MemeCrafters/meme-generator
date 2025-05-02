@@ -5,6 +5,7 @@ from pathlib import Path
 from pil_utils import BuildImage
 
 from meme_generator import add_meme
+from meme_generator.tags import MemeTags
 
 img_dir = Path(__file__).parent / "images"
 
@@ -28,6 +29,7 @@ add_meme(
     min_images=1,
     max_images=1,
     keywords=["丢", "扔"],
+    tags=MemeTags.touhou,
     date_created=datetime(2021, 5, 5),
     date_modified=datetime(2023, 3, 30),
 )
