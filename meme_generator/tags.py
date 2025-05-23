@@ -135,6 +135,9 @@ class MemeTags:
     sabbat_of_the_witch = {"魔女的夜宴"} | yuzu_soft
     ayachi = {"绫地宁宁"} | sabbat_of_the_witch
 
+    #请问您今天要来点兔子吗？
+    kafu_chino = {"香风智乃"}
+
     # 其他
     capoo = {"猫猫虫", "咖波"}
     nekoha = {"猫羽雫"}
