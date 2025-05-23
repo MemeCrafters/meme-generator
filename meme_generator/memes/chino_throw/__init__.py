@@ -14,7 +14,7 @@ img_dir = Path(__file__).parent / "images"
 def chino_throw(images: list[BuildImage], texts, args):
     img = images[0].convert("RGBA").square()
     frames: list[IMG] = []
-    
+
     locs = [
         (133, 299, 372, 485, 240, 186),
         (133, 299, 372, 485, 240, 186),
@@ -38,14 +38,14 @@ def chino_throw(images: list[BuildImage], texts, args):
         (0, 0, 500, 500, 500, 500),
         (0, 0, 500, 500, 500, 500),
     ]
-    
+
     for i in range(21):
         frame = BuildImage.open(img_dir / f"{i}.png")
         x1, y1, x2, y2, w, h = locs[i]
         avatar_w, avatar_h = x2 - x1, y2 - y1
         frame.paste(img.resize((avatar_w, avatar_h)), (x1, y1), below=True)
         frames.append(frame.image)
-    
+
     return save_gif(frames, 0.07)
 
 
