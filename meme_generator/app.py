@@ -120,9 +120,7 @@ def getMemeResponse(meme: Meme) -> MemeInfoResponse:
         args_model = args_type.args_model
         args_type_response = MemeArgsResponse(
             args_model=model_json_schema(args_model),
-            args_examples=[
-                model_dump(example) for example in args_type.args_examples
-            ],
+            args_examples=[model_dump(example) for example in args_type.args_examples],
             parser_options=args_type.parser_options,
         )
     paramsResponse = MemeParamsResponse(
@@ -143,6 +141,7 @@ def getMemeResponse(meme: Meme) -> MemeInfoResponse:
         date_created=meme.date_created,
         date_modified=meme.date_modified,
     )
+
 
 def register_routers():
     @app.post("/memes/render_list")
