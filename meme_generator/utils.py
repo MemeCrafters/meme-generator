@@ -13,6 +13,8 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Any, Callable, Literal, TypeVar
 
 import httpx
+import skia
+from PIL import Image
 from PIL.Image import Image as IMG
 from pil_utils import BuildImage, Text2Image
 from pil_utils.typing import ColorType
@@ -338,6 +340,28 @@ def make_gif_or_combined_gif(
         frames.append(frame.image)
 
     return save_gif(frames, duration)
+
+
+def to_skia_image(image: IMG) -> skia.Image:
+    return skia.Image.frombytes(
+        image.convert("RGBA").tobytes(), image.size, skia.kRGBA_8888_ColorType
+    )
+
+
+def from_skia_image(image: skia.Image) -> IMG:
+    return Image.fromarray(
+        image.convert(
+            colorType=skia.kRGBA_8888_ColorType, alphaType=skia.kUnpremul_AlphaType
+        )
+    ).convert("RGBA")
+
+
+def new_skia_surface(size: tuple[int, int]):
+    return skia.Surfaces.MakeRasterN32Premul(size[0], size[1])
+
+
+def skia_sampling_options() -> skia.SamplingOptions:
+    return skia.SamplingOptions(skia.FilterMode.kLinear, skia.MipmapMode.kLinear)
 
 
 def translate(text: str, lang_from: str = "auto", lang_to: str = "zh") -> str:
