@@ -30,6 +30,7 @@ qrcode = "^8.0"
 typing-extensions = ">=4.4.0,<5.0.0"
 arclet-alconna = "^1.8.23,!=1.8.27"
 arclet-alconna-tools = "^0.7.9"
+skia-python = ">=138.0"
 
 [tool.poetry.group.dev.dependencies]
 
