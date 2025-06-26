@@ -34,7 +34,7 @@ COPY --from=tmp /tmp/requirements.txt /app/requirements.txt
 COPY ./resources/fonts/* /usr/share/fonts/meme-fonts/
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends fontconfig fonts-noto-color-emoji libgl1-mesa-glx libgl1-mesa-dri gettext \
+  && apt-get install -y --no-install-recommends fontconfig fonts-noto-color-emoji libgl1-mesa-glx libgl1-mesa-dri libegl1-mesa gettext \
   && fc-cache -fv \
   && apt-get purge -y --auto-remove \
   && rm -rf /var/lib/apt/lists/* \
