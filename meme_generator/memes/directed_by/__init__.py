@@ -1,18 +1,19 @@
 from datetime import datetime
 from pathlib import Path
-from pypinyin import lazy_pinyin
 
 from pil_utils import BuildImage, Text2Image
+from pypinyin import lazy_pinyin
 
 from meme_generator import CommandShortcut, add_meme
 
 img_dir = Path(__file__).parent / "images"
 
+
 def directed_by(images: list[BuildImage], texts: list[str], args):
     font_families = ["Zhi Mang Xing"]
 
     name = texts[0][:-2]
-    pinyin = ''.join(lazy_pinyin(name))
+    pinyin = "".join(lazy_pinyin(name))
     pinyin = pinyin.title()
 
     # 准备水印文本
@@ -40,18 +41,16 @@ def directed_by(images: list[BuildImage], texts: list[str], args):
         line1,
         font_size=int(width * 0.18),  # 动态字体大小
         font_families=font_families,
-        fill="red"
+        fill="red",
     ).to_image()
 
     text2 = Text2Image.from_text(
-        line2,
-        font_size=int(width * 0.07),
-        fill="red"
+        line2, font_size=int(width * 0.07), fill="red"
     ).to_image()
 
     # 计算居中位置
     text1_x = x + (text_area_width - text1.width) // 2
-    text1_y = y + (watermark_height//2 - text1.height) // 2
+    text1_y = y + (watermark_height // 2 - text1.height) // 2
 
     text2_x = x + (text_area_width - text2.width) // 2
     text2_y = text1_y + text1.height
@@ -61,6 +60,7 @@ def directed_by(images: list[BuildImage], texts: list[str], args):
     frame.paste(text2, (text2_x, int(text2_y)), alpha=True)
 
     return frame.save_png()
+
 
 add_meme(
     "directed_by",
