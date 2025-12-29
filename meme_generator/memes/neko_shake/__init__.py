@@ -1,10 +1,12 @@
 from datetime import datetime
 from pathlib import Path
-from PIL import ImageSequence, Image
+
 from arclet.alconna import store_true
+from PIL import Image, ImageSequence
 from pil_utils import BuildImage
 from pydantic import Field
-from meme_generator import add_meme, MemeArgsModel, MemeArgsType, ParserOption
+
+from meme_generator import MemeArgsModel, MemeArgsType, ParserOption, add_meme
 from meme_generator.utils import save_gif
 
 img_dir = Path(__file__).parent / "images"
@@ -33,7 +35,7 @@ def neko_shake(images, texts, args: Model):
     neko = BuildImage.open(img_dir / "neko.gif")
 
     item_size = 103
-    w,h =245,200
+    w, h = 245, 200
 
     # 2. 处理用户图片
     img = images[0].convert("RGBA")
@@ -54,18 +56,11 @@ def neko_shake(images, texts, args: Model):
         user_img = user_img.circle()
 
     # 5. 图片在每一帧的坐标
-    locs = [
-        (142, 95),
-        (118, 57),
-        (118, 16),
-        (142, 42)
-    ]
+    locs = [(142, 95), (118, 57), (118, 16), (142, 42)]
 
     # 6. 逐帧合成
     frames = []
-    source_frames = [
-        frame.copy() for frame in ImageSequence.Iterator(neko.image)
-    ]
+    source_frames = [frame.copy() for frame in ImageSequence.Iterator(neko.image)]
 
     for i, frame in enumerate(source_frames):
         frame = BuildImage(frame)
