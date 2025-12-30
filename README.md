@@ -39,6 +39,7 @@ _✨ 表情包生成器，用于制作各种沙雕表情包 ✨_
 其他表情仓库：
 - [MemeCrafters/meme-generator-contrib](https://github.com/MemeCrafters/meme-generator-contrib) meme-generator 额外表情仓库
 - [anyliew/meme_emoji](https://github.com/anyliew/meme_emoji) 更多热门表情包模板
+- [LRZ9712/tudou-meme](https://github.com/LRZ9712/tudou-meme) 手搓的一些表情包模版
 
 ## 已知问题
 
