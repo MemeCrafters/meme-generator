@@ -40,11 +40,16 @@ class MemeParamsResponse(BaseModel):
 class MemeInfoResponse(BaseModel):
     key: str
     params_type: MemeParamsResponse
+    params: MemeParamsResponse
     keywords: list[str]
     shortcuts: list[CommandShortcut]
     tags: set[str]
     date_created: datetime
     date_modified: datetime
+
+
+class MemeInfoResponses(BaseModel):
+    memes: list[MemeInfoResponse]
 
 
 def register_router(meme: Meme):
@@ -109,6 +114,35 @@ class RenderMemeListRequest(BaseModel):
     add_category_icon: bool = True
 
 
+def getMemeResponse(meme: Meme) -> MemeInfoResponse:
+    args_type_response = None
+    if args_type := meme.params_type.args_type:
+        args_model = args_type.args_model
+        args_type_response = MemeArgsResponse(
+            args_model=model_json_schema(args_model),
+            args_examples=[model_dump(example) for example in args_type.args_examples],
+            parser_options=args_type.parser_options,
+        )
+    paramsResponse = MemeParamsResponse(
+        min_images=meme.params_type.min_images,
+        max_images=meme.params_type.max_images,
+        min_texts=meme.params_type.min_texts,
+        max_texts=meme.params_type.max_texts,
+        default_texts=meme.params_type.default_texts,
+        args_type=args_type_response,
+    )
+    return MemeInfoResponse(
+        key=meme.key,
+        params_type=paramsResponse,
+        params=paramsResponse,
+        keywords=meme.keywords,
+        shortcuts=meme.shortcuts,
+        tags=meme.tags,
+        date_created=meme.date_created,
+        date_modified=meme.date_modified,
+    )
+
+
 def register_routers():
     @app.post("/memes/render_list")
     def _(params: RenderMemeListRequest = RenderMemeListRequest()):
@@ -132,13 +166,26 @@ def register_routers():
         media_type = str(filetype.guess_mime(content)) or "text/plain"
         return Response(content=content, media_type=media_type)
 
+    @app.get("/meme/code")
+    def _():
+        return "python"
+
     @app.get("/meme/version")
     def _():
         return __version__
 
     @app.get("/memes/keys")
+    @app.get("/meme/keys")
     def _():
         return get_meme_keys()
+
+    @app.get("/meme/infos")
+    def _():
+        memes = get_memes()
+        memesResponse = MemeInfoResponses(memes=[])
+        for meme in memes:
+            memesResponse.memes.append(getMemeResponse(meme))
+        return memesResponse.memes
 
     @app.get("/memes/{key}/info")
     def _(key: str):
@@ -147,33 +194,22 @@ def register_routers():
         except NoSuchMeme as e:
             raise HTTPException(status_code=e.status_code, detail=e.message)
 
-        args_type_response = None
-        if args_type := meme.params_type.args_type:
-            args_model = args_type.args_model
-            args_type_response = MemeArgsResponse(
-                args_model=model_json_schema(args_model),
-                args_examples=[
-                    model_dump(example) for example in args_type.args_examples
-                ],
-                parser_options=args_type.parser_options,
-            )
+        return getMemeResponse(meme)
 
-        return MemeInfoResponse(
-            key=meme.key,
-            params_type=MemeParamsResponse(
-                min_images=meme.params_type.min_images,
-                max_images=meme.params_type.max_images,
-                min_texts=meme.params_type.min_texts,
-                max_texts=meme.params_type.max_texts,
-                default_texts=meme.params_type.default_texts,
-                args_type=args_type_response,
-            ),
-            keywords=meme.keywords,
-            shortcuts=meme.shortcuts,
-            tags=meme.tags,
-            date_created=meme.date_created,
-            date_modified=meme.date_modified,
-        )
+    @app.get("/meme/search")
+    def _(query: str, include_tags: bool = True):
+        memes = get_memes()
+        memesResponse = MemeInfoResponses(memes=[])
+        for meme in memes:
+            if query in meme.key:
+                memesResponse.memes.append(getMemeResponse(meme))
+            for keyword in meme.keywords:
+                if query in keyword:
+                    memesResponse.memes.append(getMemeResponse(meme))
+            if include_tags:
+                for tag in meme.tags:
+                    if query in tag:
+                        memesResponse.memes.append(getMemeResponse(meme))
 
     @app.get("/memes/{key}/preview")
     async def _(key: str):
